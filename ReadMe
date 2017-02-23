@@ -9,3 +9,5 @@ sudo apt-get install python-django
 django-admin startproject mysite         
 python manage.py runserver
 python manage.py startapp myapp
+
+// Add name of your app in settings.py in mysite directory
