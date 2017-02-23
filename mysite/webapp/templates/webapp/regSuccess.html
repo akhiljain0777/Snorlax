@@ -1,0 +1,16 @@
+{% extends "webapp/header.html" %}
+
+{% block content %}
+
+<form action="/" method="post">
+
+	
+    <h3> Thanks for Registering </h3>
+
+    <button type="submit">Click here to get back to login page</button>
+
+    {% csrf_token %}
+  
+</form>
+
+{% endblock %}
