@@ -9,6 +9,7 @@ urlpatterns = [url(r'^$',views.login, name = 'login'),
 			   url(r'^loginCheckUser',views.loginCheckUser, name = 'loginCheckUser'),
 			   url(r'^loginCheckRest',views.loginCheckRest, name = 'loginCheckRest'),
 			   url(r'^uWelcome',views.uWelcome,name='uWelcome'),
-			   url(r'^rWelcome',views.rWelcome,name='rWelcome')
+			   url(r'^rWelcome',views.rWelcome,name='rWelcome'),
+			   url(r'^search',views.search,name='search'),
 			   ]
   
