@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 #from models import user
 from webapp.models import user
@@ -11,7 +11,11 @@ def loginCheck(request):
 	print q1
 	if len(q1)==0:
 		return render(request,'webapp/loginFail.html')
-	#return render(request,'webapp/')
+	return redirect('uWelcome')
+	#render(request,'webapp/uWelcome.html')
+
+def uWelcome(request):
+	return render(request,'webapp/uWelcome.html')
 
 def register(request):
 	return render(request,'webapp/register.html')

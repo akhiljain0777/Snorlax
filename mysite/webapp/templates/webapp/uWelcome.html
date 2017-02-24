@@ -1,0 +1,15 @@
+{% extends "webapp/header.html" %}
+
+{% block content %}
+
+<form action="chut" method="post">
+	<h1>WELCOME!!</h1>
+
+    <button type="submit">Search</button>
+     {% csrf_token %}
+
+  
+</form>
+
+
+{% endblock %}
