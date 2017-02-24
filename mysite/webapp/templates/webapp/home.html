@@ -1,23 +1,80 @@
+
 {% extends "webapp/header.html" %}
 
 {% block content %}
 
-<form action="/loginCheck" method="post">
+<style type="text/css">
+#form1{
+		position:absolute;
+		width:350px;
+		top:90px;
+		left:100px;
+	  }			
 
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+#form3{
+		position:absolute;
+		width:350px;
+		top:90px;
+		left:500px;
+	  }	
 
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+</style>	
+</head>
+<body bgcolor="#F8F8F8">
+<div id="form1">
+<form action="/loginCheckUser" method="post">
+	<label><b>User</b></label>
+    </br></br>
 
-    <button type="submit">Login</button>
+    <label><b>Username</b></label> 
+    </br></br>
+    <input type="text"  placeholder="Enter Username" name="uname" required>
+    </br></br>
+    
+	<label><b>Password</b></label>
+	</br></br>
+	<input type="password" placeholder="Enter Password" name="psw" required><button type="submit">Login</button>
+	</br></br>
+    
      {% csrf_token %}
   
 </form>
 
-<form action="/register" method="post">
+
+
+<form action="/registerUser" method="post">
     <button type="submit">Register</button>  
     {% csrf_token %}
 </form>
+</div>
+
+<div id="form3">
+<form action="/loginCheckRest" method="post">
+
+	<label><b>Restaurant</b></label>
+	</br></br>
+
+	<label><b>Username</b></label>
+	</br></br>
+	<input type="text" placeholder="Enter Name" name="uname" required>
+	</br></br>
+
+	<label><b>Password</b></label>
+    </br></br>
+    <input type="password" placeholder="Enter Password" name="psw" required><button type="submit">Login</button>
+	</br></br>
+	{% csrf_token %}
+
+</form>
+
+
+
+<form action="/registerRest" method="post">
+    <button type="submit">Add Restaurant</button>  
+    {% csrf_token %}
+</form>
+</div>
 
 {% endblock %}
+</body>
+</html>
