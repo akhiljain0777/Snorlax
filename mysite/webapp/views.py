@@ -3,6 +3,7 @@ from django.http import HttpResponse
 #from models import user
 from webapp.models import user,restaurant
 from django.template import RequestContext
+from django.db.models import F,Q
 
 def login(request):
 	return render(request,'webapp/home.html')
@@ -49,8 +50,11 @@ def regSuccessRest(request):
 def search(request):
     query = request.POST.get('q')
     query=str(query)
-    results = restaurant.objects.raw('SELECT * FROM webapp_restaurant')
-    context = RequestContext(request)
-    for r in results:
-    	print r.name
+    qset = Q()
+    for term in query.split():
+    	qset |= Q(name__contains=term)
+	results = restaurant.objects.filter(qset)
+	context = RequestContext(request)
+    #for r in results:
+    #	print r.name
     return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
