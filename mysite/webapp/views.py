@@ -40,11 +40,11 @@ def registerRest(request):
 
 
 def regSuccessUser(request):
-	u1=user.objects.create(uname=request.POST.get('uname'),name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('psw'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
+	u1=user.objects.create(uname=request.POST.get('uname'),name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('add'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
 	return render(request,'webapp/regSuccess.html')
 
 def regSuccessRest(request):
-	u1=restaurant.objects.create(uname=request.POST.get('uname'),name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('psw'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
+	u1=restaurant.objects.create(uname=request.POST.get('uname'),name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('add'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
 	return render(request,'webapp/regSuccess.html')
 
 def search(request):

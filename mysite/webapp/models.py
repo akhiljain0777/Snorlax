@@ -1,7 +1,6 @@
 from django.db import models
 from django import forms
 from django.utils import timezone
-#import datetime
 
 # Create your models here.
 
@@ -19,7 +18,7 @@ class menu(models.Model):
 	uname=models.CharField(max_length=30)
 
 class restaurant(models.Model):
-	uname=models.CharField(max_length=30)
+	uname=models.CharField(max_length=20)
 	name=models.CharField(max_length=30)
 	password=models.CharField(max_length=20)
 	address=models.CharField(max_length=100)
@@ -44,5 +43,3 @@ class order(models.Model):
 	payment=models.CharField(max_length=19)
 	status=models.CharField(max_length=20)
 	order_date = models.DateTimeField("Order Date",auto_now_add=True, blank=True)
-	#order_time = models.TimeField(_(u"Order Time"),auto_now_add=True, blank=True)
-
