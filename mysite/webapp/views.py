@@ -13,6 +13,7 @@ def loginCheckUser(request):
 	print q1
 	if len(q1)==0:
 		return render(request,'webapp/loginFail_user.html')
+	request.session['uname']=request.POST.get('uname')
 	return redirect('uWelcome')
 	#render(request,'webapp/uWelcome.html')
 
@@ -21,6 +22,7 @@ def loginCheckRest(request):
 	print q1
 	if len(q1)==0:
 		return render(request,'webapp/loginFail_rest.html')
+	request.session['uname']=request.POST.get('uname')
 	return redirect('rWelcome')
 	#render(request,'webapp/uWelcome.html')
 
@@ -48,13 +50,12 @@ def regSuccessRest(request):
 	return render(request,'webapp/regSuccess.html')
 
 def search(request):
-    query = request.POST.get('q')
-    query=str(query)
-    qset = Q()
-    for term in query.split():
-    	qset |= Q(name__contains=term)
+	print request.session['uname']
+	query = request.POST.get('q')
+	query=str(query)
+	qset = Q()
+	for term in query.split():
+		qset |= Q(name__contains=term)
 	results = restaurant.objects.filter(qset)
 	context = RequestContext(request)
-    #for r in results:
-    #	print r.name
-    return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
+	return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
