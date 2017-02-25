@@ -9,7 +9,7 @@ def login(request):
 	return render(request,'webapp/home.html')
 
 def loginCheckUser(request):
-	q1=user.objects.filter(name=request.POST.get('uname'),password=request.POST.get('psw'))
+	q1=user.objects.filter(uname=request.POST.get('uname'),password=request.POST.get('psw'))
 	print q1
 	if len(q1)==0:
 		return render(request,'webapp/loginFail_user.html')
@@ -17,7 +17,7 @@ def loginCheckUser(request):
 	#render(request,'webapp/uWelcome.html')
 
 def loginCheckRest(request):
-	q1=restaurant.objects.filter(name=request.POST.get('uname'),password=request.POST.get('psw'))
+	q1=restaurant.objects.filter(uname=request.POST.get('uname'),password=request.POST.get('psw'))
 	print q1
 	if len(q1)==0:
 		return render(request,'webapp/loginFail_rest.html')
@@ -40,11 +40,11 @@ def registerRest(request):
 
 
 def regSuccessUser(request):
-	u1=user.objects.create(name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('psw'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
+	u1=user.objects.create(uname=request.POST.get('uname'),name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('psw'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
 	return render(request,'webapp/regSuccess.html')
 
 def regSuccessRest(request):
-	u1=restaurant.objects.create(name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('psw'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
+	u1=restaurant.objects.create(uname=request.POST.get('uname'),name=request.POST.get('name'),password=request.POST.get('psw'),address=request.POST.get('psw'),mobile=request.POST.get('call'),email=request.POST.get('mail'))
 	return render(request,'webapp/regSuccess.html')
 
 def search(request):
