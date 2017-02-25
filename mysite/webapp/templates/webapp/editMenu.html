@@ -1,0 +1,21 @@
+{% extends "webapp/header.html" %}
+
+{% block content %}
+	<label><b>Remove Item from Menu</b></label>
+	{% for MenuItem in m1 %}
+	<form action="/removeMenuItem" method="POST">
+		{{ MenuItem.name }}
+		&emsp;
+		{{ MenuItem.price }}
+		&emsp;
+		<button type = "submit">x</button>
+		</br>
+		</br>
+		{% csrf_token %}
+	</form>
+	{% endfor %}
+	<form action="/addMenuItem" method="POST">
+		<button type="submit">Add Menu Item</button>
+		{% csrf_token %}
+	</form>
+{% endblock %}

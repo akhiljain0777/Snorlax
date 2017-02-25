@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,render_to_response
 from django.http import HttpResponse
 #from models import user
-from webapp.models import user,restaurant
+from webapp.models import user,restaurant,menu
 from django.template import RequestContext
 from django.db.models import F,Q
 
@@ -59,3 +59,17 @@ def search(request):
 	results = restaurant.objects.filter(qset)
 	context = RequestContext(request)
 	return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
+
+def editMenu(request):
+	request.session['uname']
+	m1=menu.objects.filter(uname=request.session['uname'])
+	context = RequestContext(request)
+	return render_to_response('webapp/editMenu.html',{"m1":m1,},context_instance=context)
+
+def addMenuItem(request):
+	return render(request,'webapp/addMenuItem.html')
+
+def menuItemAdded(request):
+	m1=menu.objects.create(name=request.POST.get('name'),price=request.POST.get('price'),uname=request.session['uname'])
+	return redirect('rWelcome')
+

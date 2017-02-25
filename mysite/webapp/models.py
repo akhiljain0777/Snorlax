@@ -15,7 +15,7 @@ class user(models.Model):
 class menu(models.Model):
 	name=models.CharField(max_length=50)
 	price=models.IntegerField()
-	uname=models.CharField(max_length=30)
+	uname=models.CharField(max_length=15)
 
 class restaurant(models.Model):
 	uname=models.CharField(max_length=20)
