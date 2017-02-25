@@ -59,3 +59,6 @@ def search(request):
 	results = restaurant.objects.filter(qset)
 	context = RequestContext(request)
 	return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
+
+def order_page(request):
+	return render(request,'webapp/order_page.html')

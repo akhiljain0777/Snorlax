@@ -11,5 +11,6 @@ urlpatterns = [url(r'^$',views.login, name = 'login'),
 			   url(r'^uWelcome',views.uWelcome,name='uWelcome'),
 			   url(r'^rWelcome',views.rWelcome,name='rWelcome'),
 			   url(r'^search',views.search,name='search'),
+			   url(r'^order',views.order_page,name='order_page'),
 			   ]
   
