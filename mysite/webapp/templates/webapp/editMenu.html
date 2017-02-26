@@ -2,14 +2,18 @@
 
 {% block content %}
 	<label><b>Remove Item from Menu</b></label>
+	</br>
+	<input type = "text" value ="Item Name" disabled>
+	<input type = "text" value ="Item Price" disabled>
+	</br>
+	</br>
 	{% for MenuItem in m1 %}
 	<form action="/removeMenuItem" method="POST">
-		{{ MenuItem.name }}
-		&emsp;
-		{{ MenuItem.price }}
-		&emsp;
-		<button type = "submit">x</button>
-		</br>
+		<input type = "text" name = "itemName" value = '{{ MenuItem.name }}' disabled>
+		<input type = "text" name = "itemPrice" value = '{{ MenuItem.price }}' disabled>
+		<button type = "submit">
+			x
+		</button>
 		</br>
 		{% csrf_token %}
 	</form>
