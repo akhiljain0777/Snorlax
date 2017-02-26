@@ -12,5 +12,8 @@ urlpatterns = [url(r'^$',views.login, name = 'login'),
 			   url(r'^rWelcome',views.rWelcome,name='rWelcome'),
 			   url(r'^search',views.search,name='search'),
 			   url(r'^order',views.order_page,name='order_page'),
+			   url(r'^editMenu',views.editMenu,name='editMenu'),
+			   url(r'^addMenuItem',views.addMenuItem,name='addMenuItem'),
+			   url(r'^menuItemAdded',views.menuItemAdded,name='menuItemAdded')
 			   ]
   

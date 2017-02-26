@@ -1,0 +1,84 @@
+<html>
+<head>
+
+
+{% extends "webapp/header.html" %}
+
+{% block content %}
+
+<style type="text/css">
+#form1{
+		position:absolute;
+		width:350px;
+		top:90px;
+		left:100px;
+	  }			
+
+#form3{
+		position:absolute;
+		width:350px;
+		top:90px;
+		left:500px;
+	  }	
+
+</style>	
+</head>
+<body bgcolor="#F8F8F8">
+<div id="form1">
+<form action="/loginCheckUser" method="post">
+	<label><b>User</b></label>
+    </br></br>
+
+    <label><b>Username</b></label> 
+    </br></br>
+    <input type="text"  placeholder="Enter Username" name="uname" required>
+    </br></br>
+    
+	<label><b>Password</b></label>
+	</br></br>
+	<input type="password" placeholder="Enter Password" name="psw" required><button type="submit">Login</button>
+	</br></br>
+    
+     {% csrf_token %}
+  
+</form>
+
+
+
+<form action="/registerUser" method="post">
+    <button type="submit">Register</button>  
+    {% csrf_token %}
+</form>
+</div>
+
+<div id="form3">
+<form action="/loginCheckRest" method="post">
+
+	<label><b>Restaurant</b></label>
+	</br></br>
+
+	<label><b>Username</b></label>
+	</br></br>
+	<input type="text" placeholder="Enter Name" name="uname" required>
+	</br></br>
+
+	<label><b>Password</b></label>
+    </br></br>
+    <input type="password" placeholder="Enter Password" name="psw" required><button type="submit">Login</button>
+	</br></br>
+	{% csrf_token %}
+
+</form>
+
+
+
+<form action="/registerRest" method="post">
+    <button type="submit">Add Restaurant</button>  
+    {% csrf_token %}
+</form>
+</div>
+
+
+</body>
+</html>
+{% endblock %}
