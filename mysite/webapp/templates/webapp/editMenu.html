@@ -3,6 +3,8 @@
 {% block content %}
 	<label><b>Remove Item from Menu</b></label>
 	</br>
+	</br>
+	</br>
 	<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
 	<b><input type = "text" style="text-align:center;" value ="Item Price" disabled></b>
 	</br>
@@ -22,6 +24,12 @@
 	{% endfor %}
 	<form action="/addMenuItem" method="POST">
 		<button type="submit">Add Menu Item</button>
+		{% csrf_token %}
+	</form>
+	</br>
+	</br>
+	<form action="/rWelcome" method="POST">
+		<button type="submit">Back to Restaurant Home</button>
 		{% csrf_token %}
 	</form>
 {% endblock %}

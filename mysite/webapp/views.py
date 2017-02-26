@@ -73,7 +73,7 @@ def addMenuItem(request):
 
 def menuItemAdded(request):
 	m1=menu.objects.create(name=request.POST.get('name'),price=request.POST.get('price'),uname=request.session['uname'])
-	return redirect('rWelcome')
+	return redirect('editMenu')
 
 def removeMenuItem(request):
 	menu.objects.filter(name=request.POST.get('name'),price=request.POST.get('price'),uname=request.session['uname']).delete()
