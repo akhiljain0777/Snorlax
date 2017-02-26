@@ -64,7 +64,6 @@ def order_page(request):
 	return render(request,'webapp/order_page.html')
 
 def editMenu(request):
-	request.session['uname']
 	m1=menu.objects.filter(uname=request.session['uname'])
 	context = RequestContext(request)
 	return render_to_response('webapp/editMenu.html',{"m1":m1,},context_instance=context)
@@ -76,3 +75,8 @@ def menuItemAdded(request):
 	m1=menu.objects.create(name=request.POST.get('name'),price=request.POST.get('price'),uname=request.session['uname'])
 	return redirect('rWelcome')
 
+def removeMenuItem(request):
+	menu.objects.filter(name=request.POST.get('name'),price=request.POST.get('price'),uname=request.session['uname']).delete()
+	m1=menu.objects.filter(uname=request.session['uname'])
+	context = RequestContext(request)
+	return redirect('editMenu')

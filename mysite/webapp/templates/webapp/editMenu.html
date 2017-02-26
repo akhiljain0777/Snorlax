@@ -3,14 +3,16 @@
 {% block content %}
 	<label><b>Remove Item from Menu</b></label>
 	</br>
-	<input type = "text" value ="Item Name" disabled>
-	<input type = "text" value ="Item Price" disabled>
+	<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
+	<b><input type = "text" style="text-align:center;" value ="Item Price" disabled></b>
 	</br>
 	</br>
 	{% for MenuItem in m1 %}
 	<form action="/removeMenuItem" method="POST">
-		<input type = "text" name = "itemName" value = '{{ MenuItem.name }}' disabled>
-		<input type = "text" name = "itemPrice" value = '{{ MenuItem.price }}' disabled>
+		<input type = "hidden" name = "name" value = '{{ MenuItem.name }}'>
+		<input type = "hidden" name = "price" value = '{{ MenuItem.price }}'>
+		<input type = "text" value = '{{ MenuItem.name }}' disabled>
+		<input type = "text" value = '{{ MenuItem.price }}' disabled>
 		<button type = "submit">
 			x
 		</button>
