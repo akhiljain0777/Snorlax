@@ -6,15 +6,25 @@
 #cart{
 		
 		position:absolute;
-		width:150px;
+		width:500px;
 		top:100px;
 		height:100%;
-		left:675px;
+		left:740px;
 
 		}
-</style>	
-</head>
+#items{
 
+position:absolute;
+width:650px;
+top:200px;
+height:100%;
+left:50px;
+
+}
+</style>	
+
+
+<div id="items">
 	<label><b>{{ rname }}</b></label>
 	</br>
 	</br>
@@ -25,7 +35,7 @@
 	</br>
 	</br>
 	{% for MenuItem in menu %}
-	<form action="/cart" method="POST">
+	<form action="/addedToCart" method="POST">
 		<input type = "hidden" name = "name" value = '{{ MenuItem.name }}'>
 		<input type = "hidden" name = "price" value = '{{ MenuItem.price }}'>
 		<input type = "text" value = '{{ MenuItem.name }}' disabled>
@@ -38,7 +48,7 @@
 		{% csrf_token %}
 	</form>
 	{% endfor %}
-	
+</div>
 	</br>
 	</br>
 
@@ -46,20 +56,16 @@
 	{% if total_amount > 0 %}
 		<h1>Cart</h1>
 		</br>
-		</br>
-		</br>
-		</br>
 		<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
 		<b><input type = "text" style="text-align:center;" value ="Item Quantity" disabled></b>
-		<b><input type = "text" style="text-align:center;" value ="Total Price" disabled></b>
 		</br>
 		</br>
 
 
 	{% for Item in Cart %}
-	<form action="/order_page3" method="POST">
+	<form action="/current_cart" method="POST">
 		<input type = "hidden" name = "name" value = '{{ Item.name }}'>
-		<input type = "hidden" name = "quantity" value = '{{ Item.quantity}}'>
+		<input type = "hidden" name = "price" value = '{{ Item.price}}'>
 		<input type = "text" value = '{{ Item.name }}' disabled>
 		<input type = "text" value = '{{ Item.quantity }}' disabled>
 		<button type = "submit">
