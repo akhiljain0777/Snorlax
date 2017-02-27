@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,render_to_response
 from django.http import HttpResponse
 #from models import user
-from webapp.models import user,restaurant,menu
+from webapp.models import user,restaurant,menu,cart,order
 from django.template import RequestContext
 from django.db.models import F,Q
 
@@ -65,14 +65,25 @@ def search(request):
 	return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
 
 def order_page(request):
-	request.session['rname']=request.POST.get('rname')	#check if we need this session
-	m1=menu.objects.filter(uname=request.session['rname'])
+	request.session['rname']=request.POST.get('rname')
+	r1=restaurant.objects.filter(uname=request.POST.get('rname'))
+	m1=menu.objects.filter(uname=r1.uname)
+	o1=order.objects.create(uname=request.session['uname'],rname=request.session['rname'],status='in_cart')
+	request.session['order_id']=o1.id
+	request.session['bill_amount']=0
 	context = RequestContext(request)
-	return render_to_response('webapp/order_page.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context)
+	return render_to_response('webapp/order_page.html',{"menu":m1,"rname":r1.name,},context_instance=context)
 
 def cart(request):
-	print 'hi'
-	#TODO
+	n1=request.POST.get('name')
+	p1=request.POST.get('price')
+	q1=request.POST.get('quantity')
+	request.session['bill_amount']+=p1*q1
+	c1=cart.objects.create(order_id=o1.id,name=n1,price=p1,quantity=q1)
+	r1=restaurant.objects.filter(uname=request.session['rname'])
+	context = RequestContext(request)
+	return render_to_response('webapp/cart.html',{"menu":m1,"rname":r1.name,"Cart":c1,"total_amount":request.session['bill_amount']},context_instance=context)
+
 
 
 '''	request.session['rname']=request.POST.get('rname')	#check if we need this session
