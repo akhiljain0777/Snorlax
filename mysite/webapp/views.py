@@ -61,7 +61,23 @@ def search(request):
 	return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
 
 def order_page(request):
-	return render(request,'webapp/order_page.html')
+	request.session['rname']=request.POST.get('rname')	#check if we need this session
+	m1=menu.objects.filter(uname=request.session['rname'])
+	context = RequestContext(request)
+	return render_to_response('webapp/order_page.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context)
+
+def order_page2(request):
+	print 'hi'
+	return render(request,'webapp/addMenuItem.html')
+
+'''	request.session['rname']=request.POST.get('rname')	#check if we need this session
+	m1=menu.objects.filter(uname=request.session['rname'])
+	context = RequestContext(request)
+
+return render_to_response('webapp/order_pa.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context) '''
+
+def checkout(request):
+	return redirect('rWelcome')
 
 def editMenu(request):
 	m1=menu.objects.filter(uname=request.session['uname'])

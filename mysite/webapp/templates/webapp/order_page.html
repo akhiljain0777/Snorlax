@@ -1,0 +1,33 @@
+{% extends "webapp/header.html" %}
+
+{% block content %}
+	<label><b>{{ rname }}</b></label>
+	</br>
+	</br>
+	</br>
+	<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
+	<b><input type = "text" style="text-align:center;" value ="Item Price" disabled></b>
+	<b><input type = "text" style="text-align:center;" value ="Item Quantity" disabled></b>
+	</br>
+	</br>
+	{% for MenuItem in menu %}
+	<form action="/order_page2" method="POST">
+		<input type = "hidden" name = "name" value = '{{ MenuItem.name }}'>
+		<input type = "hidden" name = "price" value = '{{ MenuItem.price }}'>
+		<input type = "text" value = '{{ MenuItem.name }}' disabled>
+		<input type = "text" value = '{{ MenuItem.price }}' disabled>
+		<input type = "text" name="quantity">
+		<button type = "submit">
+			Add to cart
+		</button>
+		</br>
+		{% csrf_token %}
+	</form>
+	{% endfor %}
+	<form action="/checkout" method="POST">
+		<button type="submit">Checkout</button>
+		{% csrf_token %}
+	</form>
+	</br>
+	</br>
+{% endblock %}
