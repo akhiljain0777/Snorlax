@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,render_to_response
 from django.http import HttpResponse
 #from models import user
-from webapp.models import user,restaurant,menu
+from webapp.models import user,restaurant,menu,order,cart
 from django.template import RequestContext
 from django.db.models import F,Q
 
@@ -100,3 +100,31 @@ def removeMenuItem(request):
 	m1=menu.objects.filter(uname=request.session['uname'])
 	context = RequestContext(request)
 	return redirect('editMenu')
+
+
+def getCurrentOrders(request):
+	#order.objects.create(uname='test',rname='dominos',status='Confirmed')
+	print request.session['uname']
+	orders=order.objects.filter(rname=request.session['uname'])
+	print len(orders)
+	#cart.objects.create(cart_id=orders[0].id,name='Palak',price=120,quantity=2)
+	context = RequestContext(request)
+	return render_to_response('webapp/currentOrders.html',{"orders":orders,},context_instance=context) 
+
+def viewOrder(request):
+	request.session['id']= request.POST.get('id')
+	orders=order.objects.filter(id=request.POST.get('id'))
+	cart_=cart.objects.filter(cart_id=orders[0].id)
+	context = RequestContext(request)
+	total=0;
+	for i in cart_:
+		total=total+i.price*i.quantity
+	return render_to_response('webapp/viewOrder.html',{"cart_":cart_,"total":total,},context_instance=context) 
+
+def updateStatus(request):
+	print request.session['id']
+	orders=order.objects.filter(id=request.session['id'])
+	orders.status=request.POST.get('OrderStatus')
+	print orders.status
+	orders[0].save()
+	return getCurrentOrders(request)

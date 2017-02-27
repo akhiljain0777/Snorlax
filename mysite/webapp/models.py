@@ -36,10 +36,8 @@ class cart(models.Model):
 
 
 class order(models.Model):
-	uname=models.CharField(max_length=30)
-	rname=models.CharField(max_length=30)
-	order_id=models.IntegerField()
-	cart_id=models.IntegerField()	
+	uname=models.CharField(max_length=20)
+	rname=models.CharField(max_length=20)
 	payment=models.CharField(max_length=19)
 	status=models.CharField(max_length=20)
 	order_date = models.DateTimeField("Order Date",auto_now_add=True, blank=True)

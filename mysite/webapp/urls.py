@@ -17,6 +17,9 @@ urlpatterns = [url(r'^$',views.login, name = 'login'),
 			   url(r'^editMenu',views.editMenu,name='editMenu'),
 			   url(r'^addMenuItem',views.addMenuItem,name='addMenuItem'),
 			   url(r'^menuItemAdded',views.menuItemAdded,name='menuItemAdded'),
-			   url(r'^removeMenuItem',views.removeMenuItem,name='removeMenuItem')
+			   url(r'^removeMenuItem',views.removeMenuItem,name='removeMenuItem'),
+			   url(r'^getCurrentOrders',views.getCurrentOrders,name='getCurrentOrders'),
+			   url(r'^viewOrder',views.viewOrder,name='viewOrder'),
+			   url(r'^updateStatus',views.updateStatus,name='updateStatus'),
 			   ]
   

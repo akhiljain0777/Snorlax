@@ -1,0 +1,43 @@
+{% if cart_ %}
+<style type="text/css">
+  #Submit_{
+        
+      padding:0;
+      border:none;
+      background:none;
+        }
+  #Submit_:focus{
+    outline:none;
+  }
+</style>    
+  {% for i in cart_ %}
+    {{ i.name }}&emsp;
+    {{ i.quantity }}&emsp;
+    {{ i.price }}&emsp;
+    </br>
+    {% csrf_token %}
+  {% endfor %}
+  	<font size='10'><b>Total={{ total }}</b></font>
+  	</br>
+ 	<form action="/updateStatus" method="POST" >
+  	<select name="OrderStatus">
+    <option value="Accepted">Accepted</option>
+    <option value="Cancelled">Cancelled</option>
+    <option value="InTransit">InTransit</option>
+    <option value="Delivered">Delivered</option>
+      {% csrf_token %}
+  	</select>
+ 	 <br><br>
+ 	   {% csrf_token %}
+  <input type="submit">
+</form>
+
+{% else %}
+  <h1>No current orders found</h1>
+  </br>
+  {% csrf_token %}
+
+  </form>
+
+  {% csrf_token %}
+{% endif %}
