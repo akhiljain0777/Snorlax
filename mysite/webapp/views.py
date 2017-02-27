@@ -70,9 +70,10 @@ def order_page(request):
 	context = RequestContext(request)
 	return render_to_response('webapp/order_page.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context)
 
-def order_page2(request):
+def cart(request):
 	print 'hi'
 	#TODO
+
 
 '''	request.session['rname']=request.POST.get('rname')	#check if we need this session
 	m1=menu.objects.filter(uname=request.session['rname'])
@@ -80,6 +81,14 @@ def order_page2(request):
 
 return render_to_response('webapp/order_pa.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context) '''
 
+def order_page3(request):
+	print 'hi'
+
+'''	request.session['rname']=request.POST.get('rname')	#check if we need this session
+	m1=menu.objects.filter(uname=request.session['rname'])
+	context = RequestContext(request)
+
+return render_to_response('webapp/order_pa.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context) '''
 def checkout(request):
 	return redirect('rWelcome')
 

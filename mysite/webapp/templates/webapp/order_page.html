@@ -1,6 +1,8 @@
 {% extends "webapp/header.html" %}
 
 {% block content %}
+
+
 	<label><b>{{ rname }}</b></label>
 	</br>
 	</br>
@@ -11,7 +13,7 @@
 	</br>
 	</br>
 	{% for MenuItem in menu %}
-	<form action="/order_page2" method="POST">
+	<form action="/cart" method="POST">
 		<input type = "hidden" name = "name" value = '{{ MenuItem.name }}'>
 		<input type = "hidden" name = "price" value = '{{ MenuItem.price }}'>
 		<input type = "text" value = '{{ MenuItem.name }}' disabled>
@@ -24,10 +26,6 @@
 		{% csrf_token %}
 	</form>
 	{% endfor %}
-	<form action="/checkout" method="POST">
-		<button type="submit">Checkout</button>
-		{% csrf_token %}
-	</form>
-	</br>
-	</br>
+
+
 {% endblock %}

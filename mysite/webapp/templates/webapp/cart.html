@@ -1,0 +1,82 @@
+{% extends "webapp/header.html" %}
+
+{% block content %}
+
+<style type="text/css">
+#cart{
+		
+		position:absolute;
+		width:150px;
+		top:100px;
+		height:100%;
+		left:675px;
+
+		}
+</style>	
+</head>
+
+	<label><b>{{ rname }}</b></label>
+	</br>
+	</br>
+	</br>
+	<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
+	<b><input type = "text" style="text-align:center;" value ="Item Price" disabled></b>
+	<b><input type = "text" style="text-align:center;" value ="Item Quantity" disabled></b>
+	</br>
+	</br>
+	{% for MenuItem in menu %}
+	<form action="/cart" method="POST">
+		<input type = "hidden" name = "name" value = '{{ MenuItem.name }}'>
+		<input type = "hidden" name = "price" value = '{{ MenuItem.price }}'>
+		<input type = "text" value = '{{ MenuItem.name }}' disabled>
+		<input type = "text" value = '{{ MenuItem.price }}' disabled>
+		<input type = "text" name="quantity">
+		<button type = "submit">
+			Add to cart
+		</button>
+		</br>
+		{% csrf_token %}
+	</form>
+	{% endfor %}
+	
+	</br>
+	</br>
+
+	<div id="cart">
+	{% if total_amount > 0 %}
+		<h1>Cart</h1>
+		</br>
+		</br>
+		</br>
+		</br>
+		<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
+		<b><input type = "text" style="text-align:center;" value ="Item Quantity" disabled></b>
+		<b><input type = "text" style="text-align:center;" value ="Total Price" disabled></b>
+		</br>
+		</br>
+
+
+	{% for Item in Cart %}
+	<form action="/order_page3" method="POST">
+		<input type = "hidden" name = "name" value = '{{ Item.name }}'>
+		<input type = "hidden" name = "quantity" value = '{{ Item.quantity}}'>
+		<input type = "text" value = '{{ Item.name }}' disabled>
+		<input type = "text" value = '{{ Item.quantity }}' disabled>
+		<button type = "submit">
+			Remove From Cart
+		</button>
+		</br>
+		{% csrf_token %}
+	</form>
+	{% endfor %}
+		
+	<font size='10'><b>Total={{ total_amount }}</b></font>
+	<form action="/checkout" method="POST">
+	<button type="submit">Checkout</button>
+		{% csrf_token %}
+	</form>
+	{% endif %}
+	
+	</div>
+
+{% endblock %}
