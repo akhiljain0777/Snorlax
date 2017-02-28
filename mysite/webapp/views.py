@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect,render_to_response
 from django.http import HttpResponse
-#from models import user
 from webapp.models import user,restaurant,menu,cart,order
 from django.template import RequestContext
 from django.db.models import F,Q
@@ -22,9 +21,6 @@ def loginCheckRest(request):
 		return render(request,'webapp/loginFail_rest.html')
 	request.session['uname']=request.POST.get('uname')
 	return redirect('rWelcome')
-	#render(request,'webapp/uWelcome.html')
-
-
 
 def uWelcome(request):
 	return render(request,'webapp/uWelcome.html')
@@ -108,7 +104,10 @@ def current_cart(request):
 		return render_to_response('webapp/order_page.html',{"menu":m1,"rname":r1[0].name,},context_instance=context)
 
 def checkout(request):
-	return redirect('rWelcome')
+	o1=order.objects.filter(id=request.session['order_id'])
+	o1[0].status='confirmed'
+	o1[0].save()
+	return render(request,'webapp/checkout.html')
 
 def editMenu(request):
 	m1=menu.objects.filter(uname=request.session['uname'])
@@ -128,11 +127,15 @@ def removeMenuItem(request):
 	context = RequestContext(request)
 	return redirect('editMenu')
 
+def myOrders(request):
+	orders=order.objects.filter(uname=request.session['uname'],~Q(status='delivered'),~Q(status='in_cart'))
+	context = RequestContext(request)
+	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
 
 def getCurrentOrders(request):
 	#order.objects.create(uname='test',rname='dominos',status='Confirmed')
 	print request.session['uname']
-	orders=order.objects.filter(rname=request.session['uname'])
+	orders=order.objects.filter(rname=request.session['uname'],~Q(status='delivered'),~Q(status='in_cart'),~Q(status='Cancelled'))
 	print len(orders)
 	#cart.objects.create(cart_id=orders[0].id,name='Palak',price=120,quantity=2)
 	context = RequestContext(request)
@@ -141,17 +144,29 @@ def getCurrentOrders(request):
 def viewOrder(request):
 	request.session['id']= request.POST.get('id')
 	orders=order.objects.filter(id=request.POST.get('id'))
-	cart_=cart.objects.filter(cart_id=orders[0].id)
+	cart_=cart.objects.filter(order_id=orders[0].id)
 	context = RequestContext(request)
 	total=0;
 	for i in cart_:
 		total=total+i.price*i.quantity
 	return render_to_response('webapp/viewOrder.html',{"cart_":cart_,"total":total,},context_instance=context) 
 
+def viewMyOrder(request):
+	request.session['id']= request.POST.get('id')
+	orders=order.objects.filter(id=request.POST.get('id'))
+	cart_=cart.objects.filter(order_id=orders[0].id)
+	context = RequestContext(request)
+	total=0;
+	for i in cart_:
+		total=total+i.price*i.quantity
+	return render_to_response('webapp/viewMyOrder.html',{"cart_":cart_,"total":total,"status":orders[0].status},context_instance=context) 
+
 def updateStatus(request):
 	print request.session['id']
 	orders=order.objects.filter(id=request.session['id'])
-	orders.status=request.POST.get('OrderStatus')
-	print orders.status
-	orders[0].save()
+	print request.POST.get('OrderStatus')
+	for i in orders:
+		i.status=request.POST.get('OrderStatus')
+		i.save()
+	print orders[0].status
 	return getCurrentOrders(request)

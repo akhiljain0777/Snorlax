@@ -21,6 +21,8 @@ urlpatterns = [url(r'^$',views.login, name = 'login'),
 			   url(r'^removeMenuItem',views.removeMenuItem,name='removeMenuItem'),
 			   url(r'^getCurrentOrders',views.getCurrentOrders,name='getCurrentOrders'),
 			   url(r'^viewOrder',views.viewOrder,name='viewOrder'),
+			   url(r'^viewMyOrder',views.viewMyOrder,name='viewMyOrder'),
 			   url(r'^updateStatus',views.updateStatus,name='updateStatus'),
+			   url(r'^myOrders',views.myOrders,name='myOrders'),
 			   ]
   

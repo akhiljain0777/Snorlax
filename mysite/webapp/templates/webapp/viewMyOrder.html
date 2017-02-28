@@ -1,0 +1,37 @@
+{% if cart_ %}
+<style type="text/css">
+  #Submit_{
+        
+      padding:0;
+      border:none;
+      background:none;
+        }
+  #Submit_:focus{
+    outline:none;
+  }
+</style>    
+  {% for i in cart_ %}
+    {{ i.name }}&emsp;
+    {{ i.quantity }}&emsp;
+    {{ i.price }}&emsp;
+    </br>
+    {% csrf_token %}
+  {% endfor %}
+    <font size='10'><b>Total={{ total }}</b></font>
+    </br>
+    <font size='8'><b>Status={{ status }}</b></font>
+    </br>
+
+ 	 <br><br>
+ 	   {% csrf_token %}
+</form>
+
+{% else %}
+  <h1>No order found</h1>
+  </br>
+  {% csrf_token %}
+
+  </form>
+
+  {% csrf_token %}
+{% endif %}
