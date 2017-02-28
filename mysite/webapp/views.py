@@ -67,31 +67,45 @@ def search(request):
 def order_page(request):
 	request.session['rname']=request.POST.get('rname')
 	r1=restaurant.objects.filter(uname=request.POST.get('rname'))
-	m1=menu.objects.filter(uname=r1.uname)
+	m1=menu.objects.filter(uname=request.POST.get('rname'))
 	o1=order.objects.create(uname=request.session['uname'],rname=request.session['rname'],status='in_cart')
 	request.session['order_id']=o1.id
 	request.session['bill_amount']=0
 	context = RequestContext(request)
-	return render_to_response('webapp/order_page.html',{"menu":m1,"rname":r1.name,},context_instance=context)
+	return render_to_response('webapp/order_page.html',{"menu":m1,"rname":r1[0].name,},context_instance=context)
 
-def cart(request):
+def addedToCart(request):
 	n1=request.POST.get('name')
 	p1=request.POST.get('price')
 	q1=request.POST.get('quantity')
-	request.session['bill_amount']+=p1*q1
-	c1=cart.objects.create(order_id=o1.id,name=n1,price=p1,quantity=q1)
+	m1=menu.objects.filter(uname=request.session['rname'])
+	request.session['bill_amount']=request.session['bill_amount']+int(p1)*int(q1)
+	c1=cart.objects.filter(order_id=request.session['order_id'],name=n1)
+	if len(c1)>0:
+		c1[0].quantity=c1[0].quantity+int(q1)
+		c1[0].save()
+	else:
+		c2=cart.objects.create(name=n1,price=p1,quantity=q1,order_id=request.session['order_id'])
+	c1=cart.objects.filter(order_id=request.session['order_id'])
 	r1=restaurant.objects.filter(uname=request.session['rname'])
 	context = RequestContext(request)
-	return render_to_response('webapp/cart.html',{"menu":m1,"rname":r1.name,"Cart":c1,"total_amount":request.session['bill_amount']},context_instance=context)
+	return render_to_response('webapp/cart.html',{"menu":m1,"rname":r1[0].name,"Cart":c1,"total_amount":request.session['bill_amount']},context_instance=context)
 
-
-
-
-'''	request.session['rname']=request.POST.get('rname')	#check if we need this session
+def current_cart(request):
+	n1=request.POST.get('name')
+	p1=request.POST.get('price')
 	m1=menu.objects.filter(uname=request.session['rname'])
+	r1=restaurant.objects.filter(uname=request.session['rname'])
+	c1=cart.objects.filter(order_id=request.session['order_id'],name=n1)
+	a=c1[0].quantity
+	request.session['bill_amount']=request.session['bill_amount']-int(c1[0].price)*int(a)
+	cart.objects.filter(order_id=request.session['order_id'],name=n1).delete()
+	c1=cart.objects.filter(order_id=request.session['order_id'])
 	context = RequestContext(request)
-
-return render_to_response('webapp/order_pa.html',{"menu":m1,"rname":request.POST.get('rname'),},context_instance=context) '''
+	if int(request.session['bill_amount'])>0:
+		return render_to_response('webapp/cart.html',{"menu":m1,"rname":r1[0].name,"Cart":c1,"total_amount":request.session['bill_amount']},context_instance=context)
+	else:
+		return render_to_response('webapp/order_page.html',{"menu":m1,"rname":r1[0].name,},context_instance=context)
 
 def checkout(request):
 	return redirect('rWelcome')
@@ -113,3 +127,31 @@ def removeMenuItem(request):
 	m1=menu.objects.filter(uname=request.session['uname'])
 	context = RequestContext(request)
 	return redirect('editMenu')
+
+
+def getCurrentOrders(request):
+	#order.objects.create(uname='test',rname='dominos',status='Confirmed')
+	print request.session['uname']
+	orders=order.objects.filter(rname=request.session['uname'])
+	print len(orders)
+	#cart.objects.create(cart_id=orders[0].id,name='Palak',price=120,quantity=2)
+	context = RequestContext(request)
+	return render_to_response('webapp/currentOrders.html',{"orders":orders,},context_instance=context) 
+
+def viewOrder(request):
+	request.session['id']= request.POST.get('id')
+	orders=order.objects.filter(id=request.POST.get('id'))
+	cart_=cart.objects.filter(cart_id=orders[0].id)
+	context = RequestContext(request)
+	total=0;
+	for i in cart_:
+		total=total+i.price*i.quantity
+	return render_to_response('webapp/viewOrder.html',{"cart_":cart_,"total":total,},context_instance=context) 
+
+def updateStatus(request):
+	print request.session['id']
+	orders=order.objects.filter(id=request.session['id'])
+	orders.status=request.POST.get('OrderStatus')
+	print orders.status
+	orders[0].save()
+	return getCurrentOrders(request)
