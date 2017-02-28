@@ -1,4 +1,0 @@
-BEGIN;
-DROP TABLE "webapp_user";
-
-COMMIT;
