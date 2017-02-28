@@ -7,13 +7,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('webapp', '0002_auto_20170225_2030'),
+        ('webapp', '0005_auto_20170225_2214'),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='restaurant',
-            old_name='uname',
-            new_name='rname',
+        migrations.RemoveField(
+            model_name='cart',
+            name='cart_id',
         ),
     ]
