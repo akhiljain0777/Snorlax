@@ -16,7 +16,30 @@ static/my_app/{% extends "webapp/header.html" %}
 	height:100px;
 	left:450px;
 
-}#Submit_{
+}
+#place2{
+    position:absolute;
+    top:30px;
+    height:500px;
+    left:840px;
+
+}
+#place3{
+    position:absolute;
+    top:30px;
+    height:500px;
+    left:970px;
+
+}
+#place4{
+    position:absolute;
+    top:30px;
+    height:500px;
+    left:1100px;
+
+}
+
+#Submit_{
         width:100px;
         height:30px;
         padding-bottom:5px;
@@ -35,6 +58,31 @@ static/my_app/{% extends "webapp/header.html" %}
         border-color:#5ca941;
         }        
 #Submit_:hover{
+        color:#fff;
+        background-color:#569e3d;
+        background-image:-webkit-linear-gradient(#79d858, #569e3d);
+        background-image:linear-gradient(#79d858, #569e3d);
+        border-color:#4a993e;
+                }
+#Submit_2{
+        width:100px;
+        height:40px;
+        padding-bottom:5px;
+        padding-top:5px;
+        padding-left:5px;
+        padding-right:5px;
+        text-align:center;
+        color:#fff;
+        -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+        background-color:#60b044;
+        background-image:-webkit-linear-gradient(#8add6d, #60b044);
+        background-image:linear-gradient(#8add6d, #60b044);
+        border-color:#5ca941;
+        }        
+#Submit_2:hover{
         color:#fff;
         background-color:#569e3d;
         background-image:-webkit-linear-gradient(#79d858, #569e3d);
@@ -80,6 +128,25 @@ static/my_app/{% extends "webapp/header.html" %}
      {% csrf_token %}
     </div>
 </form>
+
+<div id="place2">
+<form action="/myOrders" method="post">
+    <button type="submit" id="submit_2"><b>Current Orders</b><b></button>
+    {% csrf_token %}
+</form>
+</div>
+<div id="place3">
+<form action="/myPreviousOrders" method="post">
+    <button type="submit" id="submit_2"><b>Previous Orders</b></button>
+    {% csrf_token %}
+</form>
+</div>
+<div id="place4">
+<form action="/logout" method="post">
+    <button type="submit" id="submit_2"><b>Logout</b></button>
+    {% csrf_token %}
+</form>
+</div>
 </body>
 
 {% endblock %}
