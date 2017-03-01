@@ -15,7 +15,7 @@
 position:absolute;
 width:500px;
 top:100px;
-height:100%;
+height:700px;
 left:400px;
 
 }
@@ -36,11 +36,16 @@ left:450px;
     -o-background-size: cover;
     background-size: cover;
     }
+#border{
+
+    border: 1px solid green;
+
+}
 </style> 
 <body id="bgimage">   
-{% if orders %}
+{% if array %}
 <div id="place">
-  <table>
+  <table cellpadding="10" cellspacing="10" id="border">
   <tr>
   <td align="center"><b><font color="grey" size="5">Order Id</font></b></td>
   <td align="center"><b><font color="grey" size="5">Order Date</font></b></td>
@@ -48,17 +53,17 @@ left:450px;
   </tr>
   <tr></tr>
   <tr></tr>
-  {% for order in orders %}
+  {% for i in array %}
   <form action="/viewMyOrder" method="POST">
   <tr>
-    <input type="hidden" name="id" value='{{ order.id }}'>
-    <td  align="center"><button type="submit" id="submit_"><b><font size=10 color="blue">{{ order.id }}</font></b></button></td>
-    <td align="center"><b><font color="white">&emsp;&emsp;&emsp;&emsp;{{ order.order_date }}&emsp;&emsp;</font></b></td>
-    <td align="center"><b><font color="white">&emsp;&emsp;&emsp;&emsp;{{ order.rname }}&emsp;&emsp;</font></b></td>
+    <input type="hidden" name="id" value='{{ i.order.id }}'>
+    <td  align="center"><button type="submit" id="submit_"><b><font size="4" color="blue">{{ i.order.id }}</font></b></button></td>
+    <td align="center"><b><font color="white">{{ i.order.order_date }}</font></b></td>
+    <td align="center"><b><font color="white">{{ i.name }}</font></b></td>
     {% csrf_token %}
   </tr>
   <tr></tr>
-    </form>
+  </form>
     </table>
   {% endfor %}
 </div>

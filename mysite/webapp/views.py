@@ -128,10 +128,24 @@ def removeMenuItem(request):
 	context = RequestContext(request)
 	return redirect('editMenu')
 
+class stru:
+    def __init__(self,name,order):
+        self.name = name
+        self.order = order
+
 def myOrders(request):
 	orders=order.objects.filter(uname=request.session['uname']).exclude(status='Delivered').exclude(status='in_cart').exclude(status='Cancelled')
 	context = RequestContext(request)
-	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
+	array=[]
+	for i in orders:
+		tmp=i.rname
+		r1=restaurant.objects.filter(uname=tmp)
+		for j in r1:
+			address=j.address
+			mobile=j.mobile
+		array.append(stru(j.name,i))
+	
+	return render_to_response('webapp/myOrders.html',{"array":array,},context_instance=context)
 
 def getCurrentOrders(request):
 	orders=order.objects.filter(rname=request.session['uname']).exclude(status='Delivered').exclude(status='in_cart').exclude(status='Cancelled')

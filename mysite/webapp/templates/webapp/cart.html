@@ -148,6 +148,7 @@ left:75px;
 
 	{% for Item in Cart %}
 	<form action="/current_cart" method="POST">
+	<tr>
 		<input type = "hidden" name = "name" value = '{{ Item.name }}'>
 		<input type = "hidden" name = "price" value = '{{ Item.price}}'>
 		<td><input type = "text" value = '{{ Item.name }}' id="input1_" disabled></td>
@@ -155,7 +156,7 @@ left:75px;
 		<td><button type = "submit" id="submit_">
 			<b>Remove</b>
 		</button></td>
-		<tr>
+		
 		</tr>
 
 		{% csrf_token %}

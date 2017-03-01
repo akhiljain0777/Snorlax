@@ -9,30 +9,71 @@
   #Submit_:focus{
     outline:none;
   }
+  #place{
+
+position:absolute;
+width:100%;
+top:100px;
+height:100%;
+left:400px;
+
+}
+#bgimage{
+    
+    background: url(static/my_app/images1.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
 </style>
+<body id="bgimage">
+<div id="place">
+<font size="5" color="white">
+<b>
   Details :- </br>
   Name = {{ name }}</br>
   Address = {{ address }}&emsp;
   Mobile = {{ mobile }}
   </br>
   </br>
-  Bill Details :-</br>
+  </b>
+</font>
+<font size="6" color="blue">
+  <b>Bill Details :-</br></b>
+  </br>
+  
+</font>
+<table cellspacing="5">
+<tr>
+  <td align="center"><font size="3" color="white"><b>Item name</b></font></td>
+  <td align="center"><font size="3" color="white"><b>Item Quantity</b></font></td>
+  <td align="center"><font size="3" color="white"><b>Item Price</b></font></td>
+</tr>
+<tr></tr>
   {% for i in cart_ %}
-    {{ i.name }}&emsp;
-    {{ i.quantity }}&emsp;
-    {{ i.price }}&emsp;
-    </br>
+  <tr>
+  <td align="center"><font size="3" color="white"><b>{{ i.name }}&emsp;</b></font></td>
+  <td align="center"><font size="3" color="white"><b>{{ i.quantity }}&emsp;</b></font></td>
+  <td align="center"><font size="3" color="white"><b>{{ i.price }}&emsp;</b></font></td>
     {% csrf_token %}
+  </tr>
+  <tr>
+  </tr>
+  <tr></tr>
   {% endfor %}
-    <font size='10'><b>Total={{ total }}</b></font>
+  </table>
+  </br>
+  </br>
+
+    <font size="4" color="yellow"><b>&emsp;&emsp;&emsp;&emsp;&emsp;Total={{ total }}</b></font>
     </br>
-    <font size='8'><b>Status={{ status }}</b></font>
+    <font size="4" color="yellow"><b>&emsp;&emsp;&emsp;Status={{ status }}</b></font>
     </br>
 
- 	 <br><br>
+ 	 </br></br>
  	   {% csrf_token %}
-</form>
-
+</div>
 {% else %}
   <h1>No order found</h1>
   </br>
