@@ -129,12 +129,12 @@ def removeMenuItem(request):
 	return redirect('editMenu')
 
 def myOrders(request):
-	orders=order.objects.filter(uname=request.session['uname']).exclude(status='delivered').exclude(status='in_cart').exclude(status='Cancelled')
+	orders=order.objects.filter(uname=request.session['uname']).exclude(status='Delivered').exclude(status='in_cart').exclude(status='Cancelled')
 	context = RequestContext(request)
 	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
 
 def getCurrentOrders(request):
-	orders=order.objects.filter(rname=request.session['uname']).exclude(status='delivered').exclude(status='in_cart').exclude(status='Cancelled')
+	orders=order.objects.filter(rname=request.session['uname']).exclude(status='Delivered').exclude(status='in_cart').exclude(status='Cancelled')
 	context = RequestContext(request)
 	return render_to_response('webapp/currentOrders.html',{"orders":orders,},context_instance=context) 
 

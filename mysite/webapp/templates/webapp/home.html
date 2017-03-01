@@ -7,13 +7,11 @@
 
 #bgimage{
 		
-		position:absolute;
-		width:100%;
-		top:0px;
-		height:100%;
-		left:0px;
-
-		background: url("food1.jpg") center repeat;
+		background: url(static/my_app/images2.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
 		}
 #form1{
 		position:absolute;
@@ -70,10 +68,11 @@
 
 #Submit_{
 		width:150px;
-		padding-bottom:12px;
-		padding-top:12px;
-		padding-left:20px;
-		padding-right:20px;
+		height:30px;
+		padding-bottom:5px;
+		padding-top:5px;
+		padding-left:5px;
+		padding-right:5px;
 		text-align:center;
 		color:#fff;
 		-moz-border-radius: 5px;
@@ -102,23 +101,23 @@
 				}
 </style>	
 </head>
-<body bgcolor="#F8F8F8">
+<body bgcolor="#F8F8F8" id="bgimage">
 
 <div id="form1">
 <form action="/loginCheckUser" method="post">
 	&emsp; &emsp; &emsp;<label ><b><font color="blue" size="10">User</font></b></label>
     </br></br>
 
-    <label><b>Username</b></label> 
+    <label><b><font color="white">Username</font></b></label> 
     </br></br>
     <input type="text" id="username_" placeholder="Enter Username" name="uname" required>
     </br></br>
     
-	<label><b>Password</b></label>
+	<label><b><font color="white">Password</font></b></label>
 	</br></br>
 	<input type="password" id="Password_" placeholder="Enter Password" name="psw" required>
 	</br></br>
-	&emsp; &emsp; <button type="submit" id="Submit_">Login</button>
+	&emsp; &emsp;&emsp; <button type="submit" id="Submit_"><b>Login</b></button>
 	</br></br>
     
      {% csrf_token %}
@@ -128,7 +127,7 @@
 
 
 <form action="/registerUser" method="post">
-    &emsp; &emsp;<button type="submit" id="Submit_">Register</button>  
+    &emsp; &emsp;&emsp;<button type="submit" id="Submit_"><b>Register</b></button>  
     {% csrf_token %}
 </form>
 </div>
@@ -139,16 +138,16 @@
 	&emsp;  <label ><b><font color="blue" size="10">Restaurant</font></b></label>
 	</br></br>
 
-	<label><b>Username</b></label>
+	<label><b><font color="white">Username</font></b></label>
 	</br></br>
 	<input type="text" id="username_" placeholder="Enter Name" name="uname" required>
 	</br></br>
 
-	<label><b>Password</b></label>
+	<label><b><font color="white">Password</font></b></label>
     </br></br>
     <input type="password" id="Password_" placeholder="Enter Password" name="psw" required>
     </br></br>
-    &emsp; &emsp; <button type="submit" id="Submit_">Login</button>
+    &emsp; &emsp;&emsp; <button type="submit" id="Submit_"><b>Login</b></button>
 	</br></br>
 	{% csrf_token %}
 
@@ -157,7 +156,7 @@
 
 
 <form action="/registerRest" method="post">
-    &emsp; &emsp;<button type="submit" id="Submit_">Add Restaurant</button>  
+    &emsp; &emsp;&emsp;<button type="submit" id="Submit_"><b>Add Restaurant</b></button>  
     {% csrf_token %}
 </form>
 </div>

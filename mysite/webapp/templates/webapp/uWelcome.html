@@ -1,25 +1,85 @@
-{% extends "webapp/header.html" %}
+static/my_app/{% extends "webapp/header.html" %}
 
 {% block content %}
+<style type="text/css">
+#bgimage{
+        
+        background: url(static/my_app/images.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        }
+#place{
+	position:absolute;
+	top:200px;
+	height:100px;
+	left:450px;
 
+}#Submit_{
+        width:100px;
+        height:30px;
+        padding-bottom:5px;
+        padding-top:5px;
+        padding-left:5px;
+        padding-right:5px;
+        text-align:center;
+        color:#fff;
+        -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+        background-color:#60b044;
+        background-image:-webkit-linear-gradient(#8add6d, #60b044);
+        background-image:linear-gradient(#8add6d, #60b044);
+        border-color:#5ca941;
+        }        
+#Submit_:hover{
+        color:#fff;
+        background-color:#569e3d;
+        background-image:-webkit-linear-gradient(#79d858, #569e3d);
+        background-image:linear-gradient(#79d858, #569e3d);
+        border-color:#4a993e;
+                }
+#button_{
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#search_{
+    background-color: white; /* Green */
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+     -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+   
+       
+        
+}
+
+</style>
+<body id="bgimage">
 <form action="/search" method="post">
-	<h1>WELCOME!!</h1>
-	<input type="text" placeholder="search here" name="q" required>
+	<div id="place">
+	<h1><font color="blue" size="10">WELCOME!!</font></h1>
+	&emsp;&emsp;&emsp;<input type="text" placeholder="search here" name="q" id="search_" required>
   	</br>
-    <button type="submit">Search</button>
+  	</br>
+    </br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button type="submit" id="submit_"><b>Search</b></button>
      {% csrf_token %}
-
+    </div>
 </form>
-
-<form action="/myOrders" method="post">
-    <button type="submit">View your Current Orders</button>
-    {% csrf_token %}
-</form>
-
-<form action="/myPreviousOrders" method="post">
-    <button type="submit">View your Previous Orders</button>
-    {% csrf_token %}
-</form>
-
+</body>
 
 {% endblock %}
