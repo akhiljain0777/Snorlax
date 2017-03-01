@@ -1,7 +1,8 @@
-{% if orders %}
+{% extends "webapp/header.html" %}
+
+{% block content %}
 <style type="text/css">
-  #Submit_{
-        
+  #Submit_{    
       padding:0;
       border:none;
       background:none;
@@ -9,23 +10,66 @@
   #Submit_:focus{
     outline:none;
   }
+#place{
+
+position:absolute;
+width:500px;
+top:100px;
+height:700px;
+left:400px;
+
+}
+#place2{
+
+position:absolute;
+width:500px;
+top:300px;
+height:100%;
+left:450px;
+
+}
+#bgimage{
+    
+    background: url(static/my_app/images1.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
 </style>    
-  {% for order in orders %}
+<body id="bgimage"> 
+{% if array %}
+<div id="place">
+  <table cellspacing="10">
+  <tr>
+  <td align="center"><b><font color="grey" size="4">Order Id</font></b></td>
+  <td align="center"><b><font color="grey" size="4">Order Date</font></b></td>
+  <td align="center"><b><font color="grey" size="4">User Name</font></b></td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+  {% for i in array %}
   <form action="/viewOrder" method="POST">
-    <input type="hidden" name="id" value='{{ order.id }}'>
-    <button type="submit" id="submit_"><font color="blue">{{ order.id }}</font></button>,
-    {{ order.id }},
-    {{ order.order_date }},
-    {{ order.uname }}
-    {% csrf_token %}
-    </form>
+  <tr>
+    <input type="hidden" name="id" value='{{ i.order.id }}'>
+    <td align="center"><button type="submit" id="submit_"><b><font size="4" color="blue">{{ i.order.id }}</font></b></button></td>
+    <td align="center"><b><font color="white">{{ i.order.order_date }}</font></b></td>
+    <td align="center"><b><font color="white">{{ i.name }}</font></b></td>
+     
+    <td>{% csrf_token %}</td>
+  </tr>
+  <tr></tr>
+  </form>
   {% endfor %}
+  </table>
+</div>
 {% else %}
-  <h1>No current orders found</h1>
+<div id="place2">
+  <h1><font color="white">No Current orders found</font></h1>
   </br>
   {% csrf_token %}
-
-  </form>
-
+</div>
   {% csrf_token %}
 {% endif %}
+</body>
+{% endblock %}

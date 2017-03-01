@@ -45,11 +45,11 @@ left:450px;
 <body id="bgimage">   
 {% if array %}
 <div id="place">
-  <table cellpadding="10" cellspacing="10" id="border">
+  <table cellspacing="10">
   <tr>
-  <td align="center"><b><font color="grey" size="5">Order Id</font></b></td>
-  <td align="center"><b><font color="grey" size="5">Order Date</font></b></td>
-  <td align="center"><b><font color="grey" size="5">Restaurant Name</font></b></td>
+  <td align="center"><b><font color="grey" size="4">Order Id</font></b></td>
+  <td align="center"><b><font color="grey" size="4">Order Date</font></b></td>
+  <td align="center"><b><font color="grey" size="4">Restaurant Name</font></b></td>
   </tr>
   <tr></tr>
   <tr></tr>
@@ -57,15 +57,16 @@ left:450px;
   <form action="/viewMyOrder" method="POST">
   <tr>
     <input type="hidden" name="id" value='{{ i.order.id }}'>
-    <td  align="center"><button type="submit" id="submit_"><b><font size="4" color="blue">{{ i.order.id }}</font></b></button></td>
+    <td align="center"><button type="submit" id="submit_"><b><font size="4" color="blue">{{ i.order.id }}</font></b></button></td>
     <td align="center"><b><font color="white">{{ i.order.order_date }}</font></b></td>
     <td align="center"><b><font color="white">{{ i.name }}</font></b></td>
-    {% csrf_token %}
+     
+    <td>{% csrf_token %}</td>
   </tr>
   <tr></tr>
   </form>
-    </table>
   {% endfor %}
+  </table>
 </div>
 {% else %}
 <div id="place2">
@@ -75,4 +76,5 @@ left:450px;
 </div>
   {% csrf_token %}
 {% endif %}
+</body>
 {% endblock %}

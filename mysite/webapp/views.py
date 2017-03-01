@@ -150,7 +150,16 @@ def myOrders(request):
 def getCurrentOrders(request):
 	orders=order.objects.filter(rname=request.session['uname']).exclude(status='Delivered').exclude(status='in_cart').exclude(status='Cancelled')
 	context = RequestContext(request)
-	return render_to_response('webapp/currentOrders.html',{"orders":orders,},context_instance=context) 
+	array=[]
+	for i in orders:
+		tmp=i.uname
+		u1=user.objects.filter(uname=tmp)
+		for j in u1:
+			address=j.address
+			mobile=j.mobile
+		array.append(stru(j.name,i))
+
+	return render_to_response('webapp/currentOrders.html',{"array":array,},context_instance=context) 
 
 def viewOrder(request):
 	request.session['id']= request.POST.get('id')
@@ -190,12 +199,30 @@ def viewMyOrder(request):
 def getPreviousOrders(request):
 	orders=order.objects.filter(rname=request.session['uname']).exclude(status='in_cart').exclude(status='Accepted').exclude(status='confirmed').exclude(status='InTransit')
 	context = RequestContext(request)
-	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
+	array=[]
+	for i in orders:
+		tmp=i.uname
+		u1=user.objects.filter(uname=tmp)
+		for j in u1:
+			address=j.address
+			mobile=j.mobile
+		array.append(stru(j.name,i))
+		
+	return render_to_response('webapp/currentOrders.html',{"array":array,},context_instance=context) 
 
 def myPreviousOrders(request):
 	orders=order.objects.filter(uname=request.session['uname']).exclude(status='in_cart').exclude(status='Accepted').exclude(status='confirmed').exclude(status='InTransit')
 	context = RequestContext(request)
-	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
+	array=[]
+	for i in orders:
+		tmp=i.rname
+		u1=restaurant.objects.filter(uname=tmp)
+		for j in u1:
+			address=j.address
+			mobile=j.mobile
+		array.append(stru(j.name,i))
+
+	return render_to_response('webapp/myOrders.html',{"array":array,},context_instance=context) 
 
 def updateStatus(request):
 	print request.session['id']

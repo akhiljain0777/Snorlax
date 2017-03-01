@@ -1,14 +1,41 @@
 {% extends "webapp/header.html" %}
 
 {% block content %}
+<style type="text/css">
+#bgimage{
+        
+        background: url(static/my_app/images.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        }
+#place{
+	position:absolute;
+	top:200px;
+	height:100%;
+	left:450px;
 
+}
+#place2{
+	position:absolute;
+	top:250px;
+	height:100%;
+	left:320px;
 
-	<h2><b>Your order is confirmed</b></h2>
+}
+</style>
+<body id="bgimage">
+
+<div id="place">
+	<h1><b>Your order is confirmed</b></h1>
+</div>
+<div id="place2">
 	</br>
 	</br>
 	</br>
-	To view your current order go to <a href="/myOrders"> My Orders </a>
-	or you may go to <a href="/uWelcome"> Home </a> for further details.
-
-
+	<font size="4" color="white"><b>To view your current order go to <a href="/myOrders"><i>My Orders</i> </a>
+	or you may go to <a href="/uWelcome"> <i>Home</i> </a> for further details.</b></font>
+</div>
+</body>
 {% endblock %}

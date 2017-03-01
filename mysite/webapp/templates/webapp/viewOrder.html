@@ -1,4 +1,4 @@
-{% if cart_ %}
+
 <style type="text/css">
   #Submit_{
         
@@ -9,18 +9,100 @@
   #Submit_:focus{
     outline:none;
   }
+  #place{
+
+position:absolute;
+width:500px;
+top:100px;
+height:700px;
+left:400px;
+
+}
+
+#bgimage{
+    
+    background: url(static/my_app/images1.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+#place2{
+
+position:absolute;
+width:500px;
+top:300px;
+height:100%;
+left:450px;
+
+}
+#Submit_{
+    width:100px;
+    height:30px;
+    padding-bottom:2px;
+    padding-top:2px;
+    padding-left:3px;
+    padding-right:3px;
+    text-align:center;
+    color:#fff;
+    -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+    text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+    background-color:#60b044;
+    background-image:-webkit-linear-gradient(#8add6d, #60b044);
+    background-image:linear-gradient(#8add6d, #60b044);
+    border-color:#5ca941;
+    }    
+#Submit_:hover{
+    color:#fff;
+    background-color:#569e3d;
+    background-image:-webkit-linear-gradient(#79d858, #569e3d);
+    background-image:linear-gradient(#79d858, #569e3d);
+    border-color:#4a993e;
+    }
+    #input1_{
+  width:130px;
+  padding-top:5px;
+  padding-bottom: 5px;
+  padding-left:3px;
+  padding-right:3px;
+  text-align:center;
+  color:black;
+  -moz-border-radius: 5px;
+   -khtml-border-radius: 5px;
+   -webkit-border-radius: 5px;
+}
 </style>    
-  {% for i in cart_ %}
-    {{ i.name }}&emsp;
-    {{ i.quantity }}&emsp;
-    {{ i.price }}&emsp;
+<body id="bgimage">
+{% if cart_ %}
+<div id="place">
+  <table cellspacing="10">
+
+    <tr>
+    <td align="center"><b><font size="4" color="grey">Item Name</font></b></td>
+    <td align="center"><b><font size="4" color="grey">Item Price</font></b></td>
+    <td align="center"><b><font size="4" color="grey">Item Quantity</font></b></td>
+    </tr>
+    <tr>
+    </tr>
+    {% for i in cart_ %}
+    <tr>
+    <td align="center"><b><font color="white">{{ i.name }}</font></b></td>
+    <td align="center"><b><font color="white">{{ i.quantity }}</font></b></td>;
+    <td align="center"><b><font color="white">{{ i.price }}</font></b></td>;
     </br>
-    {% csrf_token %}
+   <td>{% csrf_token %}</td>
+   </tr>
+   <tr></tr>
   {% endfor %}
-  	<font size='10'><b>Total={{ total }}</b></font>
+  </table>
+  </br>
+  	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<font size='6' color="blue"><b>Total={{ total }}</b></font>
   	</br>
+    </br>
  	<form action="/updateStatus" method="POST" >
-  	<select name="OrderStatus">
+  	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<select name="OrderStatus" id="input1_">
     <option value="Accepted">Accepted</option>
     <option value="Cancelled">Cancelled</option>
     <option value="InTransit">InTransit</option>
@@ -29,10 +111,11 @@
   	</select>
  	 <br><br>
  	   {% csrf_token %}
-  <input type="submit">
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" id="submit_">
 </form>
-
+</div>
 {% else %}
+<div id="place2">
   <h1>No current orders found</h1>
   </br>
   {% csrf_token %}
@@ -40,4 +123,6 @@
   </form>
 
   {% csrf_token %}
+</div>
 {% endif %}
+</body>
