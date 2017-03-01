@@ -8,59 +8,85 @@
 {% block content %}
 
 <style type="text/css">
+#bgimage{
+		
+		background: url(static/my_app/images1.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		}
+#button_{
+    background-color: #4CAF50; /* Green */
+    color: blue;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -moz-border-radius: 5px;
+   -khtml-border-radius: 5px;
+   -webkit-border-radius: 5px;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+	background-color:#60b044;
+	background-image:-webkit-linear-gradient(#8add6d, #60b044);
+	background-image:linear-gradient(#8add6d, #60b044);
+	border-color:#5ca941;
+}
 #form1{
 		position:absolute;
-		width:350px;
-		top:90px;
-		left:100px;
+		width:400px;
+		top:200px;
+		left:250px;
 	  }			
 
 #form3{
 		position:absolute;
-		width:350px;
-		top:90px;
-		left:500px;
+		width:400px;
+		top:200px;
+		left:750px;
+
 	  }	
 
 #form4{
 		position:absolute;
-		width:350px;
-		top:180px;
-		left:500px;
+		width:400px;
+		top:400px;
+		left:750px;
 	  }	
 #form2{
 		position:absolute;
-		width:350px;
-		top:180px;
-		left:100px;
+		width:400px;
+		top:400px;
+		left:250px;
 	  }		
 </style>	
 </head>
-<body bgcolor="#F8F8F8">
+<body bgcolor="#F8F8F8" id="bgimage">
 <div id="form1">
 <form action="/editRestDetails" method="post">
-<button type="submit">Edit Details</button>  
+<button type="submit" id="button_">Edit Details</button>  
     {% csrf_token %}
 </form>
 </div>
 
 <div id="form2">
 <form action="/editMenu" method="post">
-<button type="submit">Edit Menu</button>  
+<button type="submit" id="button_">Edit Menu</button>  
     {% csrf_token %}
 </form>
 </div>
 
 <div id="form3">
 <form action="/getCurrentOrders" method="post">
-<button type="submit">Current Orders</button>  
+<button type="submit" id="button_">Current Orders</button>  
     {% csrf_token %}
 </form>
 </div>
 
 <div id="form4">
 <form action="/getPreviousOrders" method="post">
-<button type="submit">Previous Orders</button>  
+<button type="submit" id="button_">Previous Orders</button>  
     {% csrf_token %}
 </form>
 </div>

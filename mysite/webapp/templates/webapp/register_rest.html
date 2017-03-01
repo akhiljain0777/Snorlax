@@ -1,69 +1,153 @@
 {% extends "webapp/header.html" %}
 
 {% block content %}
+<style type="text/css">
+#bgimage{
+        
+        background: url(static/my_app/images.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        }
+#form1{
+        position:absolute;
+        width:650px;
+        top:90px;
+        left:450px;
+      } 
+#Username_{
+  padding-bottom:8px;
+  padding-top:8px;
+  width:250px;
+ -moz-border-radius: 5px;
+ -khtml-border-radius: 5px;
+ -webkit-border-radius: 5px;
+
+  }
+#Username_:focus {
+        border-color: #ffffff;
+         border-radius: 5px;
+        -moz-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 12px #ffffff;
+        -moz-box-shadow: 0px 0px 12px #ffffff;
+        box-shadow: 0px 0px 12px #ffffff;
+       
+        }
+#Password_{
+padding-bottom:8px;
+padding-top:8px;
+width:250px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+    }
+#Password_:focus {
+border-color: #ffffff;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+-webkit-box-shadow: 0px 0px 12px #ffffff;
+-moz-box-shadow: 0px 0px 12px #ffffff;
+box-shadow: 0px 0px 12px #ffffff;
+        }
+#Submit_{
+        width:150px;
+        padding-bottom:12px;
+        padding-top:12px;
+        padding-left:20px;
+        padding-right:20px;
+        text-align:center;
+        color:#fff;
+        -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+        background-color:#60b044;
+        background-image:-webkit-linear-gradient(#8add6d, #60b044);
+        background-image:linear-gradient(#8add6d, #60b044);
+        border-color:#5ca941;
+        }        
+#Submit_:hover{
+        color:#fff;
+        background-color:#569e3d;
+        background-image:-webkit-linear-gradient(#79d858, #569e3d);
+        background-image:linear-gradient(#79d858, #569e3d);
+        border-color:#4a993e;
+                }
+</style>    
+</head>
+<body id="bgimage">
+
+<div id="form1">
 <form action="/regSuccessRest" method="post">
 
-    <label><b>Username</b></label>
+    <label><b><font color="blue" size="4">Username</font></b></label>
     </br>
 
-    <input type="text" placeholder="Enter username" name="uname" required>
+    <input type="text" placeholder="Enter username" name="uname" id="Username_" required>
 
     </br>
-    <label><b>Name</b></label>
+    </br>
+    <label><font color="blue" size="4"><b>Name</b></font></label>
     </br>
 
-    <input type="text" placeholder="Enter name of restaurant" name="name" required>
+    <input type="text" placeholder="Enter name of restaurant" name="name" id="Username_" required>
 
 
     </br>
      </br>
 
-    <label><b>Password</b></label>
+    <label><font color="blue" size="4"><b>Password</b></font></label>
     </br>
 
-    <input type="password" placeholder="Enter Password for restaurant" name="psw" width="50px" required>
-
-    </br>
-    </br>
-
-    <label><b>Address</b></label>
-    </br>
-
-
-    <input type="text" placeholder="Enter Address for restaurant" name="add" required>
-
+    <input type="password" placeholder="Enter Password for restaurant" id="Password_" name="psw" width="50px" required>
 
     </br>
     </br>
 
-    <label><b>Contact / Mobile</b></label>
+    <label><font color="blue" size="4"><b>Address</b></font></label>
     </br>
-    <input type="text" placeholder="Enter Contact for restaurant" name="call"  required>
+
+
+    <input type="text" placeholder="Enter Address for restaurant" id="Username_" name="add" required>
 
 
     </br>
     </br>
 
-    <label><b>Email</b></label>
+    <label><font color="blue" size="4"><b>Contact / Mobile</b></font></label>
     </br>
-    <input type="text" placeholder="Enter Email for restaurant" name="mail" required>
+    <input type="text" placeholder="Enter Contact for restaurant" id="Username_" name="call"  required>
 
 
     </br>
     </br>
 
-    <label><b>Overview</b></label>
+    <label><font color="blue" size="4"><b>Email</b></font></label>
     </br>
-    <input type="text" placeholder="Overview" name="over" required>
+    <input type="text" placeholder="Enter Email for restaurant" id="Username_" name="mail" required>
+
+
+    </br>
+    </br>
+
+    <label><font color="blue" size="4"><b>Overview</b></font></label>
+    </br>
+    <input type="text" placeholder="Overview" id="Username_" name="over" required>
 
     
     </br>
     </br>
 
 
-    <button type="submit">Submit</button>
+    &emsp;&emsp;&emsp;<button type="submit" id="submit_" >Submit</button>
 
      {% csrf_token %}
 </form>
+</div>
 
 {% endblock %}

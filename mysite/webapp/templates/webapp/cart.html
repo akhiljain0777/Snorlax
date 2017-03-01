@@ -6,77 +6,169 @@
 #cart{
 		
 		position:absolute;
-		width:150px;
-		top:100px;
+		width:500px;
+		top:80px;
 		height:100%;
-		left:675px;
+		left:740px;
 
 		}
-</style>	
-</head>
+#items{
 
-	<label><b>{{ rname }}</b></label>
+position:absolute;
+width:500px;
+top:80px;
+height:100%;
+left:75px;
+
+}
+#bgimage{
+		
+		background: url(static/my_app/images1.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		}
+#input1_{
+	width:120px;
+	padding-top:5px;
+	padding-bottom: 5px;
+	padding-left:3px;
+	padding-right:3px;
+	text-align:center;
+	color:black;
+	-moz-border-radius: 5px;
+   -khtml-border-radius: 5px;
+   -webkit-border-radius: 5px;
+}
+#Submit_{
+		width:100px;
+		height:30px;
+		padding-bottom:2px;
+		padding-top:2px;
+		padding-left:3px;
+		padding-right:3px;
+		text-align:center;
+		color:#fff;
+		-moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+		text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+		background-color:#60b044;
+		background-image:-webkit-linear-gradient(#8add6d, #60b044);
+		background-image:linear-gradient(#8add6d, #60b044);
+		border-color:#5ca941;
+		}		 
+#Submit_:hover{
+		color:#fff;
+		background-color:#569e3d;
+		background-image:-webkit-linear-gradient(#79d858, #569e3d);
+		background-image:linear-gradient(#79d858, #569e3d);
+		border-color:#4a993e;
+		}
+#Submit_2{
+		width:130px;
+		
+		padding-bottom:2px;
+		padding-top:2px;
+		padding-left:3px;
+		padding-right:3px;
+		text-align:center;
+		color:#fff;
+		-moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+		text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+		background-color:#60b044;
+		background-image:-webkit-linear-gradient(#8add6d, #60b044);
+		background-image:linear-gradient(#8add6d, #60b044);
+		border-color:#5ca941;
+		}		 
+#Submit_2:hover{
+		color:#fff;
+		background-color:#569e3d;
+		background-image:-webkit-linear-gradient(#79d858, #569e3d);
+		background-image:linear-gradient(#79d858, #569e3d);
+		border-color:#4a993e;
+		}
+
+</style>	
+
+<body id="bgimage">
+<div id="items">
+
+	<label><h1><font color="white">&emsp;&emsp;&emsp;&emsp;&emsp;{{ rname }}</font></h1></label>
 	</br>
-	</br>
-	</br>
-	<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
-	<b><input type = "text" style="text-align:center;" value ="Item Price" disabled></b>
-	<b><input type = "text" style="text-align:center;" value ="Item Quantity" disabled></b>
-	</br>
-	</br>
+	
+	<table>
+	<tr>
+	<td align="center"><b><font color="white">Item Name</font></b></td>
+	<td align="center"><b><font color="white">Item Price</font></b></td>
+	<td align="center"><b><font color="white">Item Quantity</font></b></td>
+	</tr>
+	<tr>
+	</tr>
 	{% for MenuItem in menu %}
-	<form action="/cart" method="POST">
+	<form action="/addedToCart" method="POST">
 		<input type = "hidden" name = "name" value = '{{ MenuItem.name }}'>
 		<input type = "hidden" name = "price" value = '{{ MenuItem.price }}'>
-		<input type = "text" value = '{{ MenuItem.name }}' disabled>
-		<input type = "text" value = '{{ MenuItem.price }}' disabled>
-		<input type = "text" name="quantity">
-		<button type = "submit">
-			Add to cart
+		<tr>
+		<td align="center"><input type = "text" value = '{{ MenuItem.name }}' id="input1_" disabled></td>
+		<td align="center"><input type = "text" value = '{{ MenuItem.price }}' id="input1_" disabled></td>
+		<td align="center"><input type = "text" id="input1_" name="quantity"></td>
+		<td align="center"><button type = "submit" id="submit_">
+			<b>Add to cart</b>
 		</button>
-		</br>
+		</td>
+		</tr>
+		<tr>
+		</tr>
 		{% csrf_token %}
 	</form>
+	</table>
 	{% endfor %}
-	
-	</br>
-	</br>
 
-	<div id="cart">
+</div>
+	
 	{% if total_amount > 0 %}
-		<h1>Cart</h1>
+	<div id="cart">
+	
+		<label><h1><font color="white">&emsp;&emsp;&emsp;&emsp;Cart</font></h1></label>
 		</br>
-		</br>
-		</br>
-		</br>
-		<b><input type = "text" style="text-align:center;" value ="Item Name" disabled></b>
-		<b><input type = "text" style="text-align:center;" value ="Item Quantity" disabled></b>
-		<b><input type = "text" style="text-align:center;" value ="Total Price" disabled></b>
-		</br>
-		</br>
+	<table>
+	<tr>
+	<td align="center"><b><font color="white">Item Name</font></b></td>
+	<td align="center"><b><font color="white">Item Quantity</font></b></td>
+	</tr>
+	<tr>
+	</tr>
 
 
 	{% for Item in Cart %}
-	<form action="/order_page3" method="POST">
+	<form action="/current_cart" method="POST">
 		<input type = "hidden" name = "name" value = '{{ Item.name }}'>
-		<input type = "hidden" name = "quantity" value = '{{ Item.quantity}}'>
-		<input type = "text" value = '{{ Item.name }}' disabled>
-		<input type = "text" value = '{{ Item.quantity }}' disabled>
-		<button type = "submit">
-			Remove From Cart
-		</button>
-		</br>
+		<input type = "hidden" name = "price" value = '{{ Item.price}}'>
+		<td><input type = "text" value = '{{ Item.name }}' id="input1_" disabled></td>
+		<td><input type = "text" value = '{{ Item.quantity }}' id="input1_" disabled></td>
+		<td><button type = "submit" id="submit_">
+			<b>Remove</b>
+		</button></td>
+		<tr>
+		</tr>
 		{% csrf_token %}
 	</form>
 	{% endfor %}
-		
-	<font size='10'><b>Total={{ total_amount }}</b></font>
+	</table>
+	</br>
+	</br>	
+	&emsp;&emsp;&emsp;&emsp;&emsp;<font size="6" color="blue"><b>Total={{ total_amount }}</b></font>
 	<form action="/checkout" method="POST">
-	<button type="submit">Checkout</button>
+	</br>
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button type="submit" id="submit_2"><h3>Checkout</h3></button>
 		{% csrf_token %}
 	</form>
 	{% endif %}
-	
+
 	</div>
 
 {% endblock %}

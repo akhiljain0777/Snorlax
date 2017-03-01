@@ -1,4 +1,4 @@
-{% if results %}
+
 <style type="text/css">
   #Submit_{
         
@@ -9,25 +9,106 @@
   #Submit_:focus{
     outline:none;
   }
-</style>    
+  #place{
+    position:absolute;
+    top:100px;
+    height:100px;
+    left:400px;
+
+  }
+  #place2{
+    position:absolute;
+    top:200px;
+    height:100px;
+    left:370px;
+
+  }
+  #bgimage{
+    
+    background: url(static/my_app/images1.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+    #search_{
+    background-color: white; /* Green */
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+     -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+      }
+   #Submit_2{
+        width:100px;
+        height:30px;
+        padding-bottom:5px;
+        padding-top:5px;
+        padding-left:5px;
+        padding-right:5px;
+        text-align:center;
+        color:#fff;
+        -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+        background-color:#60b044;
+        background-image:-webkit-linear-gradient(#8add6d, #60b044);
+        background-image:linear-gradient(#8add6d, #60b044);
+        border-color:#5ca941;
+        }        
+#Submit_2:hover{
+        color:#fff;
+        background-color:#569e3d;
+        background-image:-webkit-linear-gradient(#79d858, #569e3d);
+        background-image:linear-gradient(#79d858, #569e3d);
+        border-color:#4a993e;
+                }
+       
+     
+</style>   
+</head>
+<body id="bgimage">
+{% if results %} 
+<div id="place">
+  <table>
   {% for result in results %}
   <form action="/order" method="POST">
+  <tr>
     <input type="hidden" name="rname" value='{{ result.uname }}'>
-    <button type="submit" id="submit_"><font color="blue">{{ result.name }}</font></button>,
-    {{ result.address }},
-    {{ result.email }}
+    <td align="center"><button type="submit" id="submit_"><font color="blue" size="5"><b>{{ result.name }}</b></font></button></td>
+    <td align="center"><font color="white" size="3"><b>&emsp;{{ result.address }}&emsp;</b></font></td>
+    <td align="center"><font color="white" size="3"><b>&emsp;{{ result.email }}&emsp;</b></font></td>
     {% csrf_token %}
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+  </tr><tr>
+  </tr><tr>
+  </tr>
     </form>
   {% endfor %}
+  </table>
+</div>
 {% else %}
+<div id="place2">
   <form action="/search" method="post">
-  <h1>WELCOME BACK!! No results found</h1>
-  <input type="text" placeholder="search here" name="q" required>
-  </br>
-  <button type="submit">Search</button>
-  {% csrf_token %}
+  <h1><font color="blue">WELCOME BACK!! No results found</font></h1>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" placeholder="search here" name="q" id="search_" required>
+    </br>
+    </br>
+    </br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button type="submit" id="submit_2"><b>Search</b></button>
+     {% csrf_token %}
 
   </form>
-
+</div>
   {% csrf_token %}
 {% endif %}
+</body>

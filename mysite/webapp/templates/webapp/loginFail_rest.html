@@ -1,25 +1,109 @@
 {% extends "webapp/header.html" %}
 
 {% block content %}
+<style type="text/css">
+#place{
+	position:absolute;
+	width:500px;
+	top:180px;
+	height:100%;
+	left:450px;
+}
+#bgimage{
+		background: url(static/my_app/images2.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		}
 
+#Username_{
+  padding-bottom:8px;
+  padding-top:8px;
+  width:250px;
+ -moz-border-radius: 5px;
+ -khtml-border-radius: 5px;
+ -webkit-border-radius: 5px;
+   
+
+  }
+#Username_:focus {
+        border-color: #ffffff;
+         border-radius: 5px;
+        -moz-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 12px #ffffff;
+        -moz-box-shadow: 0px 0px 12px #ffffff;
+        box-shadow: 0px 0px 12px #ffffff;
+       
+        }
+#Password_{
+padding-bottom:8px;
+padding-top:8px;
+width:250px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+    }
+#Password_:focus {
+border-color: #ffffff;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+-webkit-box-shadow: 0px 0px 12px #ffffff;
+-moz-box-shadow: 0px 0px 12px #ffffff;
+box-shadow: 0px 0px 12px #ffffff;
+        }
+#Submit_{
+        width:150px;
+        padding-bottom:12px;
+        padding-top:12px;
+        padding-left:20px;
+        padding-right:20px;
+        text-align:center;
+        color:#fff;
+        -moz-border-radius: 5px;
+       -khtml-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        text-shadow:0 -1px 0 rgba(0,0,0,0.15);
+        background-color:#60b044;
+        background-image:-webkit-linear-gradient(#8add6d, #60b044);
+        background-image:linear-gradient(#8add6d, #60b044);
+        border-color:#5ca941;
+        }        
+#Submit_:hover{
+        color:#fff;
+        background-color:#569e3d;
+        background-image:-webkit-linear-gradient(#79d858, #569e3d);
+        background-image:linear-gradient(#79d858, #569e3d);
+        border-color:#4a993e;
+        }
+</style>
+</head>
+<body id="bgimage">
+<div id="place">
 <form action="/loginCheckRest" method="post">
 
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit">Login</button>
-    <h3>Login Failed </h3>
+    <label><b><font size="4" color="blue" >Username</font></b></label>
+    </br>
+    <input type="text" id="username_" placeholder="Enter Username" name="uname" required>
+    </br>
+    </br>
+    <label><b><font size="4" color="blue">Password</font></b></label>
+    </br>
+    <input type="password" id="Password_" placeholder="Enter Password" name="psw" required>
+    </br>
+    </br>
+    &emsp;&emsp;&emsp;<button type="submit" id="submit_"><b><font size="3">Login</font></b></button>
+    <h3><font size="5" color="red">&emsp;&emsp;Login Failed </font></h3>
      {% csrf_token %}
-
-  
 </form>
-
 <form action="/registerUserRest" method="post">
-    <button type="submit">Register</button>  
+     &emsp;&emsp;&emsp;<button type="submit" id="submit_"><b><font size="3">Add Restaurant</font></b></button>  
     {% csrf_token %}
 </form>
-
+</div>
 {% endblock %}
+</body>
