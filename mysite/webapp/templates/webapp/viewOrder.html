@@ -9,8 +9,16 @@
   #Submit_:focus{
     outline:none;
   }
-</style>    
+</style>
+  Details :- </br>
+  Name = {{ name }}</br>&emsp;
+  Address = {{ address }}&emsp;
+  Mobile = {{ mobile }}&emsp;
+  </br>
+  </br>
+  Bill Details :-</br>
   {% for i in cart_ %}
+    {{ i }}: 
     {{ i.name }}&emsp;
     {{ i.quantity }}&emsp;
     {{ i.price }}&emsp;

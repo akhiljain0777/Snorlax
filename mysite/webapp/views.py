@@ -105,8 +105,9 @@ def current_cart(request):
 
 def checkout(request):
 	o1=order.objects.filter(id=request.session['order_id'])
-	o1[0].status='confirmed'
-	o1[0].save()
+	for i in o1:
+		i.status='confirmed'
+		i.save()
 	return render(request,'webapp/checkout.html')
 
 def editMenu(request):
@@ -128,16 +129,12 @@ def removeMenuItem(request):
 	return redirect('editMenu')
 
 def myOrders(request):
-	orders=order.objects.filter(uname=request.session['uname'],~Q(status='delivered'),~Q(status='in_cart'))
+	orders=order.objects.filter(uname=request.session['uname']).exclude(status='delivered').exclude(status='in_cart').exclude(status='Cancelled')
 	context = RequestContext(request)
 	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
 
 def getCurrentOrders(request):
-	#order.objects.create(uname='test',rname='dominos',status='Confirmed')
-	print request.session['uname']
-	orders=order.objects.filter(rname=request.session['uname'],~Q(status='delivered'),~Q(status='in_cart'),~Q(status='Cancelled'))
-	print len(orders)
-	#cart.objects.create(cart_id=orders[0].id,name='Palak',price=120,quantity=2)
+	orders=order.objects.filter(rname=request.session['uname']).exclude(status='delivered').exclude(status='in_cart').exclude(status='Cancelled')
 	context = RequestContext(request)
 	return render_to_response('webapp/currentOrders.html',{"orders":orders,},context_instance=context) 
 
@@ -146,20 +143,45 @@ def viewOrder(request):
 	orders=order.objects.filter(id=request.POST.get('id'))
 	cart_=cart.objects.filter(order_id=orders[0].id)
 	context = RequestContext(request)
-	total=0;
+	for i in orders:
+		name=i.uname
+		u1=user.objects.filter(uname=name)
+		for j in u1:
+			name=j.name
+			address=j.address
+			mobile=j.mobile
+	total=0
 	for i in cart_:
 		total=total+i.price*i.quantity
-	return render_to_response('webapp/viewOrder.html',{"cart_":cart_,"total":total,},context_instance=context) 
+	return render_to_response('webapp/viewOrder.html',{"cart_":cart_,"total":total,"name":name,"address":address,"mobile":mobile,},context_instance=context) 
 
 def viewMyOrder(request):
 	request.session['id']= request.POST.get('id')
 	orders=order.objects.filter(id=request.POST.get('id'))
 	cart_=cart.objects.filter(order_id=orders[0].id)
 	context = RequestContext(request)
+	for i in orders:
+		status=i.status
+		name=i.rname
+		r1=restaurant.objects.filter(uname=name)
+		for j in r1:
+			name=j.name
+			address=j.address
+			mobile=j.mobile
 	total=0;
 	for i in cart_:
 		total=total+i.price*i.quantity
-	return render_to_response('webapp/viewMyOrder.html',{"cart_":cart_,"total":total,"status":orders[0].status},context_instance=context) 
+	return render_to_response('webapp/viewMyOrder.html',{"cart_":cart_,"total":total,"status":status,"name":name,"address":address,"mobile":mobile,},context_instance=context) 
+
+def getPreviousOrders(request):
+	orders=order.objects.filter(rname=request.session['uname']).exclude(status='in_cart').exclude(status='Accepted').exclude(status='confirmed').exclude(status='InTransit')
+	context = RequestContext(request)
+	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
+
+def myPreviousOrders(request):
+	orders=order.objects.filter(uname=request.session['uname']).exclude(status='in_cart').exclude(status='Accepted').exclude(status='confirmed').exclude(status='InTransit')
+	context = RequestContext(request)
+	return render_to_response('webapp/myOrders.html',{"orders":orders,},context_instance=context)
 
 def updateStatus(request):
 	print request.session['id']
@@ -168,5 +190,4 @@ def updateStatus(request):
 	for i in orders:
 		i.status=request.POST.get('OrderStatus')
 		i.save()
-	print orders[0].status
 	return getCurrentOrders(request)
