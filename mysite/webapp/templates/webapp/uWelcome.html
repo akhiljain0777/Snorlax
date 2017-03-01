@@ -11,5 +11,15 @@
 
 </form>
 
+<form action="/myOrders" method="post">
+    <button type="submit">View your Current Orders</button>
+    {% csrf_token %}
+</form>
+
+<form action="/myPreviousOrders" method="post">
+    <button type="submit">View your Previous Orders</button>
+    {% csrf_token %}
+</form>
+
 
 {% endblock %}

@@ -11,37 +11,30 @@
   }
 </style>
   Details :- </br>
-  Name = {{ name }}</br>&emsp;
+  Name = {{ name }}</br>
   Address = {{ address }}&emsp;
-  Mobile = {{ mobile }}&emsp;
+  Mobile = {{ mobile }}
   </br>
   </br>
   Bill Details :-</br>
   {% for i in cart_ %}
-    {{ i }}: 
     {{ i.name }}&emsp;
     {{ i.quantity }}&emsp;
     {{ i.price }}&emsp;
     </br>
     {% csrf_token %}
   {% endfor %}
-  	<font size='10'><b>Total={{ total }}</b></font>
-  	</br>
- 	<form action="/updateStatus" method="POST" >
-  	<select name="OrderStatus">
-    <option value="Accepted">Accepted</option>
-    <option value="Cancelled">Cancelled</option>
-    <option value="InTransit">InTransit</option>
-    <option value="Delivered">Delivered</option>
-      {% csrf_token %}
-  	</select>
+    <font size='10'><b>Total={{ total }}</b></font>
+    </br>
+    <font size='8'><b>Status={{ status }}</b></font>
+    </br>
+
  	 <br><br>
  	   {% csrf_token %}
-  <input type="submit">
 </form>
 
 {% else %}
-  <h1>No current orders found</h1>
+  <h1>No order found</h1>
   </br>
   {% csrf_token %}
 

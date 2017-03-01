@@ -1,0 +1,31 @@
+{% if orders %}
+<style type="text/css">
+  #Submit_{
+        
+      padding:0;
+      border:none;
+      background:none;
+        }
+  #Submit_:focus{
+    outline:none;
+  }
+</style>    
+  {% for order in orders %}
+  <form action="/viewMyOrder" method="POST">
+    <input type="hidden" name="id" value='{{ order.id }}'>
+    <button type="submit" id="submit_"><font size=10 color="blue">{{ order.id }}</font></button>,
+    {{ order.id }},
+    {{ order.order_date }},
+    {{ order.uname }}
+    {% csrf_token %}
+    </form>
+  {% endfor %}
+{% else %}
+  <h1>No orders found</h1>
+  </br>
+  {% csrf_token %}
+
+  </form>
+
+  {% csrf_token %}
+{% endif %}
