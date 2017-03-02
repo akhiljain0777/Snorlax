@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,render_to_response
 from django.http import HttpResponse
 from webapp.models import user,restaurant,menu,cart,order
 from django.template import RequestContext
-from django.db.models import F,Q
+from django.db.models import F,Q,Count
 
 def login(request):
 	return render(request,'webapp/home.html')
@@ -23,7 +23,15 @@ def loginCheckRest(request):
 	return redirect('rWelcome')
 
 def uWelcome(request):
-	return render(request,'webapp/uWelcome.html')
+	o1=order.objects.filter(uname=request.session['uname'],status='Delivered').values('rname').annotate(rname_count=Count('rname')).order_by('rname_count')[:2]
+	f1=[]
+	for i in o1:
+		r1=restaurant.objects.get(uname=i['rname'])
+		f1.append(r1)
+	for i in f1:
+		print i
+	context = RequestContext(request)
+	return render_to_response('webapp/uWelcome.html',{"favorites": f1,},context_instance=context)
 
 def rWelcome(request):
 	return render(request,'webapp/rWelcome.html')
@@ -50,13 +58,15 @@ def regSuccessRest(request):
 	return render(request,'webapp/regSuccess.html')
 
 def search(request):
-	print request.session['uname']
 	query = request.POST.get('q')
 	query=str(query)
 	qset = Q()
 	for term in query.split():
 		qset |= Q(name__contains=term)
+	menu_results = menu.objects.filter(qset)
 	results = restaurant.objects.filter(qset)
+	for i in menu_results:
+		results|=restaurant.objects.filter(uname=i.uname)
 	context = RequestContext(request)
 	return render_to_response('webapp/results.html', {"results": results,},context_instance=context)
 
@@ -214,6 +224,7 @@ def myPreviousOrders(request):
 	orders=order.objects.filter(uname=request.session['uname']).exclude(status='in_cart').exclude(status='Accepted').exclude(status='confirmed').exclude(status='InTransit')
 	context = RequestContext(request)
 	array=[]
+	print len(orders)
 	for i in orders:
 		tmp=i.rname
 		u1=restaurant.objects.filter(uname=tmp)
@@ -232,3 +243,7 @@ def updateStatus(request):
 		i.status=request.POST.get('OrderStatus')
 		i.save()
 	return getCurrentOrders(request)
+
+def logout(request):
+	del request.session['uname']
+	return redirect('/')

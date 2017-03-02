@@ -75,8 +75,24 @@ left:450px;
 }
 </style>    
 <body id="bgimage">
+
 {% if cart_ %}
 <div id="place">
+  <font size="5" color="white">
+  <b>
+    Details :- </br>
+    Name = {{ name }}</br>
+    Address = {{ address }}&emsp;
+    Mobile = {{ mobile }}
+    </br>
+    </br>
+    </b>
+  </font>
+  <font size="6" color="blue">
+    <b>Bill Details :-</br></b>
+    </br>
+    
+  </font>
   <table cellspacing="10">
 
     <tr>
@@ -89,8 +105,8 @@ left:450px;
     {% for i in cart_ %}
     <tr>
     <td align="center"><b><font color="white">{{ i.name }}</font></b></td>
-    <td align="center"><b><font color="white">{{ i.quantity }}</font></b></td>;
-    <td align="center"><b><font color="white">{{ i.price }}</font></b></td>;
+    <td align="center"><b><font color="white">{{ i.quantity }}</font></b></td>
+    <td align="center"><b><font color="white">{{ i.price }}</font></b></td>
     </br>
    <td>{% csrf_token %}</td>
    </tr>

@@ -14,7 +14,14 @@ static/my_app/{% extends "webapp/header.html" %}
 	position:absolute;
 	top:200px;
 	height:100px;
-	left:450px;
+	left:250px;
+
+}
+#place5{
+    position:absolute;
+    top:200px;
+    height:100%;
+    left:700px;
 
 }
 #place2{
@@ -38,7 +45,15 @@ static/my_app/{% extends "webapp/header.html" %}
     left:1100px;
 
 }
-
+  #Submit_3{
+        
+      padding:0;
+      border:none;
+      background:none;
+        }
+  #Submit_3:focus{
+    outline:none;
+  }
 #Submit_{
         width:100px;
         height:30px;
@@ -128,6 +143,28 @@ static/my_app/{% extends "webapp/header.html" %}
      {% csrf_token %}
     </div>
 </form>
+<div id="place5">
+<h1><font color="yellow" size="10">&emsp;Favorites</font></h1>
+<table>
+  {% for result in favorites %}
+  <form action="/order" method="POST">
+  <tr>
+    <input type="hidden" name="rname" value='{{ result.uname }}'>
+    <td align="center"><button type="submit" id="submit_3"><font color="blue" size="5"><b>{{ result.name }}</b></font></button></td>
+    <td align="center"><font color="white" size="3"><b>&emsp;{{ result.address }}&emsp;</b></font></td>
+    <td align="center"><font color="white" size="3"><b>&emsp;{{ result.email }}&emsp;</b></font></td>
+    {% csrf_token %}
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+  </tr><tr>
+  </tr><tr>
+  </tr>
+    </form>
+  {% endfor %}
+  </table>
+ </div>
 
 <div id="place2">
 <form action="/myOrders" method="post">
